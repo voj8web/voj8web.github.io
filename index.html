@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Aguarde, estamos entrando em contato com o atendimento ao cliente</title>
+  </head>
+  <body>
+    <h1>Aguarde, estamos entrando em contato com o atendimento ao cliente</h1>
+    <script>
+      // 定義一個網站列表，包含你的10個網站的網址
+      var sites = [
+        "https://wa.me/5541996268462",
+        "https://wa.me/5521970730135",
+        "https://wa.me/5582988025942",
+        "https://wa.me/5522988484480",
+        "https://wa.me/5582996776838",
+        "https://wa.me/5583991400448",
+        "https://wa.me/5561981016552",
+        "https://wa.me/5522974016261",
+        "https://wa.me/5521970093039",
+        "https://wa.me/5515992587413"
+      ];
+
+      // 隨機選擇一個網站並跳轉到該網站
+      var randomIndex = Math.floor(Math.random() * sites.length);
+      window.location.href = sites[randomIndex];
+    </script>
+  </body>
+</html>
