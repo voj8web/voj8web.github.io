@@ -59,12 +59,17 @@
       font-weight: bold; /* 文字加粗 */
       text-align: center; /* 文字置中 */
       line-height: 20px; /* 行高與進度條高度相同 */
-      transition: width 2s linear; /* 調整進度條變化的過渡效果 */
+      animation: fill-progress 2s ease-in-out forwards; /* 進度條填充動畫 */
     }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fill-progress {
+      0% { width: 0; }
+      100% { width: 100%; }
     }
   </style>
 </head>
@@ -77,7 +82,7 @@
     <div class="loading-text">Aguarde, estamos entrando em contato com o atendimento ao cliente</div>
     <!-- 進度條 -->
     <div class="progress-bar">
-      <div class="progress" style="width: 100%; transition: none;">100%</div>
+      <div class="progress">0%</div>
     </div>
   </div>
 
@@ -105,12 +110,15 @@
     // 在進度條上顯示動畫
     setTimeout(function() {
       var progress = document.querySelector('.progress');
-      progress.style.width = '0%'; // 重置進度條寬度
-      progress.innerText = '0%'; // 重置進度條文字
-      setTimeout(function() {
-        progress.style.width = '100%'; // 進度條寬度設置為100%
-        progress.innerText = '100%'; // 進度條文字設置為100%
-      }, 50); // 延遲50毫秒以觸發過渡效果
+      var count = 0; // 初始進度
+      var interval = setInterval(function() {
+        progress.style.width = count + '%'; // 設置進度條寬度
+        progress.innerText = count + '%'; // 設置進度條文字
+        count++; // 增加進度
+        if (count > 100) {
+          clearInterval(interval); // 如果達到100%，停止計時器
+        }
+      }, 20); // 每20毫秒更新一次進度
     }, 100); // 延遲100毫秒以保證動畫效果正常顯示
   </script>
 </body>
