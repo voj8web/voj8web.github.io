@@ -1,25 +1,117 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Aguarde, estamos entrando em contato com o atendimento ao cliente</title>
-  </head>
-  <body>
-    <h1>Aguarde, estamos entrando em contato com o atendimento ao cliente</h1>
-    <script>
-      // 定義一個網站列表，包含你的10個網站的網址
-      var sites = [
-        "https://wa.me/5541997074637",
-        "https://wa.me/5541999803520",
-        "https://wa.me/5541997193721",
-        "https://wa.me/554197207034",
-        "https://wa.me/554196418739",
-        "https://wa.me/5544988263226"
-      ];
+<head>
+  <meta charset="UTF-8">
+  <title>Aguarde, estamos entrando em contato com o atendimento ao cliente</title>
+  <style>
+    /* 定義等待動畫 */
+    @keyframes slide {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
 
-      // 隨機選擇一個網站並跳轉到該網站
-      var randomIndex = Math.floor(Math.random() * sites.length);
-      window.location.href = sites[randomIndex];
-    </script>
-  </body>
+    /* 等待動畫樣式 */
+    .loader-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* 視窗高度 */
+    }
+
+    .loader {
+      border: 32px solid #f3f3f3; /* 灰色 */
+      border-top: 32px solid #3498db; /* 深藍色 */
+      border-radius: 50%;
+      width: 200px; /* 調整寬度 */
+      height: 200px; /* 調整高度 */
+      animation: spin 2s linear infinite;
+      background-image: url('static/picture/which-customer-service-in-differ.png'); /* 背景圖片的 URL */
+      background-size: cover;
+    }
+
+    /* 文字樣式 */
+    .loading-text {
+      margin-top: 20px; /* 與圖案的間距 */
+      font-size: 24px; /* 文字大小 */
+      font-weight: bold; /* 加粗 */
+      text-align: center; /* 文字置中 */
+      color: black; /* 文字顏色設置為黑色 */
+    }
+
+    /* 進度條樣式 */
+    .progress-bar {
+      width: 200px; /* 調整進度條寬度 */
+      height: 20px; /* 調整進度條高度 */
+      background-color: #f3f3f3; /* 灰色背景 */
+      margin-top: 10px; /* 與文字的間距 */
+      position: relative; /* 相對定位 */
+    }
+
+    .progress {
+      width: 0; /* 初始寬度為0 */
+      height: 100%; /* 高度與進度條相同 */
+      background-color: #3498db; /* 深藍色 */
+      position: absolute; /* 絕對定位 */
+      top: 0; /* 定位到進度條的頂部 */
+      left: 0; /* 距離進度條左邊的距離 */
+      color: black; /* 文字顏色設置為黑色 */
+      font-weight: bold; /* 文字加粗 */
+      text-align: center; /* 文字置中 */
+      line-height: 20px; /* 行高與進度條高度相同 */
+      transition: width 2s linear; /* 調整進度條變化的過渡效果 */
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- 等待動畫置中的容器 -->
+  <div class="loader-wrapper">
+    <!-- 等待動畫 -->
+    <div class="loader"></div>
+    <!-- 下方文字 -->
+    <div class="loading-text">Aguarde, estamos entrando em contato com o atendimento ao cliente</div>
+    <!-- 進度條 -->
+    <div class="progress-bar">
+      <div class="progress" style="width: 100%; transition: none;">100%</div>
+    </div>
+  </div>
+
+  <script>
+    var sites = [
+      "https://wa.me/5541997074637",
+      "https://wa.me/5541999803520",
+      "https://wa.me/5541997193721",
+      "https://wa.me/554197207034",
+      "https://wa.me/554196418739",
+      "https://wa.me/5544988263226"
+    ];
+
+    var lastIndex = -1;
+
+    function getNextSite() {
+      lastIndex = (lastIndex + 1) % sites.length;
+      return sites[lastIndex];
+    }
+
+    setTimeout(function() {
+      window.location.href = getNextSite();
+    }, 2000); // 2秒延遲
+
+    // 在進度條上顯示動畫
+    setTimeout(function() {
+      var progress = document.querySelector('.progress');
+      progress.style.width = '0%'; // 重置進度條寬度
+      progress.innerText = '0%'; // 重置進度條文字
+      setTimeout(function() {
+        progress.style.width = '100%'; // 進度條寬度設置為100%
+        progress.innerText = '100%'; // 進度條文字設置為100%
+      }, 50); // 延遲50毫秒以觸發過渡效果
+    }, 100); // 延遲100毫秒以保證動畫效果正常顯示
+  </script>
+</body>
 </html>
