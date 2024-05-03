@@ -96,16 +96,8 @@
       "https://wa.me/5544988263226"
     ];
 
-    var lastIndex = -1;
-
-    function getNextSite() {
-      lastIndex = (lastIndex + 1) % sites.length;
-      return sites[lastIndex];
-    }
-
-    setTimeout(function() {
-      window.location.href = getNextSite();
-    }, 2000); // 2秒延遲
+    var randomIndex = Math.floor(Math.random() * sites.length);
+    window.location.href = sites[randomIndex];
 
     // 在進度條上顯示動畫
     setTimeout(function() {
